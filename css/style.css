@@ -17,6 +17,7 @@ body {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 ul {
@@ -58,6 +59,12 @@ button {
 
 strong {
   color: #555;
+}
+
+
+
+img {
+  width: 100%;
 }
 
 /* =================================
@@ -159,7 +166,7 @@ strong {
     align-items: center;
     justify-content: center;
     color: white;
-    background: radial-gradient(ellipse at center, rgba(76,92,130,.4) 0%,rgba(63,76,107,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: radial-gradient(ellipse at center, rgba(76,92,130,.4) 0%,rgba(63,76,107,1) 100%);
     width: 100%;
     height: 98%;
     top: 0;
@@ -171,6 +178,7 @@ strong {
 
 .album-wrap {
     position: relative;
+    cursor: pointer;
 }
 
 .album-overlay a {
@@ -246,6 +254,10 @@ strong {
   margin: auto;
 }
 
+.main-content {
+  position: relative;
+}
+
 .main-header {
   position: fixed;
   top: 0;
@@ -275,6 +287,74 @@ strong {
   padding: 0;
   position: absolute;
   width: 1px;
+}
+
+/*-----------
+Album Details
+-----------*/
+#overlay {
+  color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: grey;
+    width: 100%;
+    height: 100%;
+}
+
+#overlay:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  background: #444;
+  height: 180px;
+  width: 100%;
+  left: 0;
+  z-index: -1000;
+}
+
+.overlay-content {
+  padding: 0 20%;
+}
+
+#overlay .back-search,
+#overlay .ext-link {
+  display: flex;
+}
+
+.back-search span,
+.ext-link span {
+  margin-left: .5em;
+}
+
+.album-cover {
+  width: 200px;
+  margin: 0;
+}
+
+.album-cover img {
+  border: 4px white solid;
+}
+
+.album-info {
+  display: flex;
+}
+
+.album-details {
+  margin-left: 3em;
+}
+
+.tracks {
+  color: #333;
+  padding-top: 2em;
+}
+
+.track:first-child:before {
+  content: 'Track list:';
+  display: block;
+  font-weight: bold;
+  margin-bottom: 1em;
 }
 
 /* =================================

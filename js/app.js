@@ -2,7 +2,10 @@
 
     let $searchField = $('#search'),
         $albums = $('#albums'),
-        $message = $('.desc');
+        $message = $('.desc'),
+        albumDetails = [],
+        clickedIndex,
+        albumClicked = false;
 
 
 
@@ -34,6 +37,23 @@
         }
     });
 
+    $albums.on('click', '.album', function (e) {
+        e.preventDefault();
+
+        let imageSelected = $(this).find('.album-artist'),
+            clickedIndex = $(this).index();
+
+
+        generateAlbumDetails(clickedIndex);
+    });
+
+    $("body").on('click', '.back-link', function (e) {
+        e.preventDefault();
+        $(this).parent().parent().fadeOut(400);
+
+
+    });
+
     /*check if there are albums from the searched input,
     return nothing to throw catch error in promise*/
     let checkData = (data) => !data.albums.items.length ? "" : data;
@@ -54,26 +74,68 @@
     let generateGallery = (data) => {
         let albums = data.albums.items,
             htmlString = "";
+        //clear album array    
+        albumDetails = [];
 
         albums.forEach((album) => {
 
+            albumDetails.push(album);
+
             htmlString += `
-        <li class='album'>
-            <div class="album-wrap">
-                <img class="album-art" src="${album.images[0].url}">
-                <div class="album-overlay">
-                <a href="${album.external_urls.spotify}" target="_blank">
-                    <p>
-                        Click Here for more info
-                    </p>
-                </a>
-            </div>
-            </div>
-            <span class="album-title">${album.name}</span>
-            <span class="album-artist">${album.artists[0].name}</span>
-        </li>`
+            <li class='album'>
+                <div class="album-wrap">
+                    <a href="#">
+                        <img class="album-art" src="${album.images[0].url}">
+                    </a>
+                    <div class="album-overlay">
+                        <p>Click for details</p>
+                    </div>
+                </div>
+                <span class="album-title">${album.name}</span>
+                <span class="album-artist">${album.artists[0].name}</span>
+            </li>`
         });
         appendItems(htmlString);
+        return albumDetails;
+    }
+
+    let generateAlbumDetails = (index) => {
+        let album = albumDetails[index],
+            htmlString = "";
+
+        albumClicked = true;
+
+        htmlString += `
+        <section id='overlay'>
+            <div class="overlay-content">
+            <a href='#' class="back-link">
+                <p class="back-search"><i class="material-icons">arrow_back</i><span>Search Results</span></p>
+            </a>
+            <div class="album-info">
+
+                <figure class="album-cover">
+                    <img src="${album.images[0].url}" alt="">
+                </figure>
+                <div class="album-details">
+                <h1>${album.name}(YEAR)</h1>
+                <a  href="${album.external_urls.spotify}"  target="_blank">
+                    <p class="ext-link"><i class="material-icons">link</i><span>${album.artists[0].name}</span></p>
+                </a>
+                <ul class="tracks">
+                    <li class="track">Track</li>
+                    <li class="track">Track</li>
+                    <li class="track">Track</li>
+                    <li class="track">Track</li>
+                    <li class="track">Track</li>
+                    <li class="track">Track</li>
+                    <li class="track">Track</li>
+                    <li class="track">Track</li>
+                </ul>
+                </div>
+            </div>
+            </div>
+        </section>`;
+        appendAlbumDetails(htmlString);
     }
 
     let appendItems = (content) => {
@@ -94,4 +156,9 @@
             });
         }, 400);
     }
+
+    let appendAlbumDetails = (content) => {
+        //add albums
+        $('.main-content').after(content);
+    };
 })(jQuery);
