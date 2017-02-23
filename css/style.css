@@ -13,6 +13,7 @@ body {
   padding-top: 145px;
   padding-bottom: 3em;
   margin: 0;
+  position: relative;
 }
 
 a {
@@ -38,7 +39,7 @@ input {
   transition: border-color .4s;
 }
 
-input ~ input {
+input~input {
   margin-left: 5px;
 }
 
@@ -61,11 +62,10 @@ strong {
   color: #555;
 }
 
-
-
 img {
   width: 100%;
 }
+
 
 /* =================================
   Page Components
@@ -89,12 +89,15 @@ img {
 .search-form input:last-of-type {
   margin-right: -40px;
 }
+
 .search-form input:nth-of-type(1) {
   width: 65%;
 }
+
 .search-form input:nth-of-type(2) {
   width: 35%;
 }
+
 .search-form input:only-of-type {
   width: 100%;
   padding-right: 35px;
@@ -117,6 +120,7 @@ img {
   display: block;
 }
 
+
 /* album LIST COMPONENTS -------- */
 
 .album-list .no-albums {
@@ -124,12 +128,12 @@ img {
   width: 60%;
 }
 
-.no-albums h3{
+.no-albums h3 {
   margin-bottom: 0;
 }
 
 .no-albums,
-.desc  {
+.desc {
   color: #b0b0b0;
   height: 140px;
   margin-top: 50px;
@@ -162,37 +166,39 @@ img {
 }
 
 .album-overlay {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    background: radial-gradient(ellipse at center, rgba(76,92,130,.4) 0%,rgba(63,76,107,1) 100%);
-    width: 100%;
-    height: 98%;
-    top: 0;
-    left: 0;
-    position: absolute;
-    opacity: 0;
-    transition: .4s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: radial-gradient(ellipse at center, rgba(76, 92, 130, .4) 0%, rgba(63, 76, 107, 1) 100%);
+  width: 100%;
+  height: 98%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  opacity: 0;
+  transition: .4s ease-in-out;
 }
 
 .album-wrap {
-    position: relative;
-    cursor: pointer;
+  position: relative;
+  cursor: pointer;
 }
 
 .album-overlay a {
   transition: .3s .1s ease-in-out;
   opacity: 0;
   transform: translateY(100px);
-} 
+}
+
 .album:hover .album-overlay {
   opacity: 1;
-} 
+}
+
 .album:hover .album-overlay a {
   opacity: 1;
   transform: translateY(0px);
-} 
+}
 
 .album-list .album {
   opacity: 0;
@@ -201,8 +207,8 @@ img {
 }
 
 .album-list li.album-animate {
-    opacity: 1;
-    transform: translateY(0px);
+  opacity: 1;
+  transform: translateY(0px);
 }
 
 .album-title {
@@ -218,11 +224,11 @@ img {
 }
 
 .album-art {
-    width: 100%;
-    min-height: 100%;
-    -webkit-transition: -webkit-transform .4s ease-out;
-    transition: transform .4s ease-out;
-  }
+  width: 100%;
+  min-height: 100%;
+  -webkit-transition: -webkit-transform .4s ease-out;
+  transition: transform .4s ease-out;
+}
 
 .poster-wrap {
   background-color: #fff;
@@ -243,19 +249,21 @@ img {
   margin: auto;
 }
 
+
 /* =================================
   Layout Styles
 ==================================== */
 
 .inner,
 .main-content {
-  width: 90%;
+  width: 100%;
   max-width: 1025px;
   margin: auto;
 }
 
 .main-content {
-  position: relative;
+  width: 100%;
+  padding: 2em;
 }
 
 .main-header {
@@ -267,6 +275,7 @@ img {
   min-height: 80px;
   z-index: 1000;
 }
+
 
 /* =================================
   Helper Classes
@@ -289,18 +298,20 @@ img {
   width: 1px;
 }
 
+
 /*-----------
 Album Details
 -----------*/
+
 #overlay {
   color: white;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    background: grey;
-    width: 100%;
-    height: 100%;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  height: 100%;
 }
 
 #overlay:before {
@@ -308,24 +319,32 @@ Album Details
   position: absolute;
   top: 0;
   background: #444;
-  height: 180px;
+  height: 160px;
   width: 100%;
   left: 0;
   z-index: -1000;
 }
 
 .overlay-content {
-  padding: 0 20%;
+  margin: 0 auto;
+  width: 660px;
 }
 
-#overlay .back-search,
 #overlay .ext-link {
-  display: flex;
+  display: inline-flex;
+  margin-top: .5em;
 }
 
-.back-search span,
+.back-link {
+  display: inline-flex;
+  margin: 1em 0;
+}
+
+.back-link span,
 .ext-link span {
   margin-left: .5em;
+  text-decoration: underline;
+  flex: 1 1 0;
 }
 
 .album-cover {
@@ -345,9 +364,13 @@ Album Details
   margin-left: 3em;
 }
 
+.album-details h1 {
+    margin: 0;
+}
+
 .tracks {
   color: #333;
-  padding-top: 2em;
+  padding-top: 3em;
 }
 
 .track:first-child:before {
@@ -356,6 +379,7 @@ Album Details
   font-weight: bold;
   margin-bottom: 1em;
 }
+
 
 /* =================================
   Media Queries
@@ -368,56 +392,46 @@ Album Details
 }
 
 @media (min-width: 550px) {
-
   .album-list li {
     float: left;
     width: 50%;
   }
-
   .album-list .desc {
     width: 100%;
     float: none;
   }
-
   .poster-wrap {
     height: 290px;
     border: 1px solid white;
     overflow: hidden;
   }
-
   .album-poster {
     width: 100%;
     min-height: 100%;
     -webkit-transition: -webkit-transform .4s ease-out;
     transition: transform .4s ease-out;
   }
-
   .poster-wrap:hover .album-poster {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
   }
-
- .album-title {
+  .album-title {
     padding-right: 1.25em;
- }
-
+  }
 }
 
 @media (min-width: 769px) {
   body {
     padding-top: 115px;
   }
-
   .main-title {
     float: left;
   }
-
   .search-form {
     width: 422px;
     float: right;
     margin-top: 34px;
   }
-
   .album-list li {
     width: 33.333333333%;
   }
@@ -433,7 +447,6 @@ Album Details
   .album-list li {
     width: 25%;
   }
-
   .album-list li:nth-of-type(4n+1) {
     clear: left;
   }
